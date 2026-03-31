@@ -45,9 +45,11 @@ def bubble_sort_iterative(collection: list[Any]) -> list[Any]:
     True
     >>> bubble_sort_iterative([-2, -45, -5]) == sorted([-2, -45, -5])
     True
-    >>> bubble_sort_iterative([-23, 0, 6, -4, 34]) == sorted([-23, 0, 6, -4, 34])
+    >>> sorted_result = bubble_sort_iterative([-23, 0, 6, -4, 34])
+    >>> sorted_result == sorted([-23, 0, 6, -4, 34])
     True
-    >>> bubble_sort_iterative(['d', 'a', 'b', 'e']) == sorted(['d', 'a', 'b', 'e'])
+    >>> sorted_result = bubble_sort_iterative(['d', 'a', 'b', 'e'])
+    >>> sorted_result == sorted(['d', 'a', 'b', 'e'])
     True
     >>> bubble_sort_iterative(['z', 'a', 'y', 'b', 'x', 'c'])
     ['a', 'b', 'c', 'x', 'y', 'z']
@@ -60,7 +62,9 @@ def bubble_sort_iterative(collection: list[Any]) -> list[Any]:
     >>> bubble_sort_iterative(collection_arg) == sorted(collection_arg)
     True
     >>> import string
-    >>> collection_arg = random.choices(string.ascii_letters + string.digits, k=100)
+    >>> collection_arg = random.choices(
+    ...     string.ascii_letters + string.digits, k=100
+    ... )
     >>> bubble_sort_iterative(collection_arg) == sorted(collection_arg)
     True
     """
@@ -125,7 +129,8 @@ def bubble_sort_recursive(collection: list[Any]) -> list[Any]:
     True
     >>> bubble_sort_recursive([-2, -45, -5]) == sorted([-2, -45, -5])
     True
-    >>> bubble_sort_recursive([-23, 0, 6, -4, 34]) == sorted([-23, 0, 6, -4, 34])
+    >>> sorted_result = bubble_sort_recursive([-23, 0, 6, -4, 34])
+    >>> sorted_result == sorted([-23, 0, 6, -4, 34])
     True
     >>> bubble_sort_recursive(['d', 'a', 'b', 'e']) == sorted(['d', 'a', 'b', 'e'])
     True
@@ -142,7 +147,9 @@ def bubble_sort_recursive(collection: list[Any]) -> list[Any]:
     >>> bubble_sort_recursive(collection_arg) == sorted(collection_arg)
     True
     >>> import string
-    >>> collection_arg = random.choices(string.ascii_letters + string.digits, k=100)
+    >>> collection_arg = random.choices(
+    ...     string.ascii_letters + string.digits, k=100
+    ... )
     >>> bubble_sort_recursive(collection_arg) == sorted(collection_arg)
     True
     """
@@ -162,8 +169,10 @@ def bubble_sort_recursive(collection: list[Any]) -> list[Any]:
             swapped = True
 
     # Base case: if no swaps occurred, the list is sorted - return it
-    # Recursive case: if swaps occurred, call the function again to make another pass
-    return collection if not swapped else bubble_sort_recursive(collection)
+    # Recursive case: if swaps occurred, call again to make another pass
+    if not swapped:
+        return collection
+    return bubble_sort_recursive(collection)
 
 
 if __name__ == "__main__":
@@ -177,16 +186,26 @@ if __name__ == "__main__":
     num_runs = 10_000
     unsorted = sample(range(-50, 50), 100)
     timer_iterative = timeit(
-        "bubble_sort_iterative(unsorted[:])", globals=globals(), number=num_runs
+        "bubble_sort_iterative(unsorted[:])",
+        globals=globals(),
+        number=num_runs
     )
     print("\nIterative bubble sort:")
     print(*bubble_sort_iterative(unsorted), sep=",")
-    print(f"Processing time (iterative): {timer_iterative:.5f}s for {num_runs:,} runs")
+    print(
+        f"Processing time (iterative): {timer_iterative:.5f}s "
+        f"for {num_runs:,} runs"
+    )
 
     unsorted = sample(range(-50, 50), 100)
     timer_recursive = timeit(
-        "bubble_sort_recursive(unsorted[:])", globals=globals(), number=num_runs
+        "bubble_sort_recursive(unsorted[:])",
+        globals=globals(),
+        number=num_runs
     )
     print("\nRecursive bubble sort:")
     print(*bubble_sort_recursive(unsorted), sep=",")
-    print(f"Processing time (recursive): {timer_recursive:.5f}s for {num_runs:,} runs")
+    print(
+        f"Processing time (recursive): {timer_recursive:.5f}s "
+        f"for {num_runs:,} runs"
+    )
