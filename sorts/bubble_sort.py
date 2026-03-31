@@ -13,7 +13,8 @@ def bubble_sort_iterative(collection: list[Any]) -> list[Any]:
     1. Start from the beginning of the list
     2. Compare each pair of adjacent elements
     3. If the left element is greater than the right, swap them
-    4. After each complete pass, the largest unsorted element reaches its correct position
+    4. After each complete pass, the largest unsorted element reaches its
+       correct position
     5. Repeat until no more swaps are needed
 
     Time Complexity: O(n²) in worst and average cases, O(n) in best case
